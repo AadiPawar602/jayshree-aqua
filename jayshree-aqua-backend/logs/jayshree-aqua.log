@@ -3544,3 +3544,319 @@ Caused by: org.springframework.data.mapping.PropertyReferenceException: No prope
 2026-04-16 23:29:54 [RMI TCP Connection(13)-127.0.0.1] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-04-16 23:29:54 [RMI TCP Connection(13)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - JayshreeAquaPool - Shutdown initiated...
 2026-04-16 23:29:54 [RMI TCP Connection(13)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - JayshreeAquaPool - Shutdown completed.
+2026-04-16 23:30:04 [main] INFO  c.j.JayshreeAquaApplication - Starting JayshreeAquaApplication using Java 17.0.12 with PID 25948 (D:\PROJECTS\jayshree-aqua\jayshree-aqua-backend\target\classes started by lenovo in D:\PROJECTS\jayshree-aqua\jayshree-aqua-backend)
+2026-04-16 23:30:04 [main] DEBUG c.j.JayshreeAquaApplication - Running with Spring Boot v3.2.4, Spring v6.1.5
+2026-04-16 23:30:04 [main] INFO  c.j.JayshreeAquaApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-16 23:30:05 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-16 23:30:05 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 66 ms. Found 5 JPA repository interfaces.
+2026-04-16 23:30:06 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 5000 (http)
+2026-04-16 23:30:06 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-16 23:30:06 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-04-16 23:30:06 [main] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2026-04-16 23:30:06 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1519 ms
+2026-04-16 23:30:06 [main] DEBUG c.j.security.JwtAuthFilter - Filter 'jwtAuthFilter' configured for use
+2026-04-16 23:30:06 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-16 23:30:06 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-04-16 23:30:06 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-04-16 23:30:06 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-16 23:30:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - JayshreeAquaPool - Starting...
+2026-04-16 23:30:07 [main] INFO  com.zaxxer.hikari.pool.HikariPool - JayshreeAquaPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@4cc89246
+2026-04-16 23:30:07 [main] INFO  com.zaxxer.hikari.HikariDataSource - JayshreeAquaPool - Start completed.
+2026-04-16 23:30:07 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-16 23:30:07 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-04-16 23:30:07 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@286dfa20) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1468e880)
+2026-04-16 23:30:07 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@508f4bb5) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5602e540)
+2026-04-16 23:30:07 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@11f9b95a) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@42066f0d)
+2026-04-16 23:30:07 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@687e561b) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@299786b1)
+2026-04-16 23:30:07 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@75f8d9b0) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@4f7ae05)
+2026-04-16 23:30:07 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@1e23ee0e) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@b144175)
+2026-04-16 23:30:07 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@38923cfe) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@1ac3a6f)
+2026-04-16 23:30:07 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@fee7ca) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@29c80149)
+2026-04-16 23:30:07 [main] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@14ad42) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@608b906d)
+2026-04-16 23:30:08 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-16 23:30:08 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-16 23:30:08 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-16 23:30:09 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1e6a74fe, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@d594a5a, org.springframework.security.web.context.SecurityContextHolderFilter@27ae8ce3, org.springframework.security.web.header.HeaderWriterFilter@27e713d4, org.springframework.web.filter.CorsFilter@77199818, org.springframework.security.web.authentication.logout.LogoutFilter@735ed1d2, com.jayshreeaqua.security.JwtAuthFilter@6806468e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@597050fa, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7511e348, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@72216f0b, org.springframework.security.web.session.SessionManagementFilter@f1a5005, org.springframework.security.web.access.ExceptionTranslationFilter@616549c, org.springframework.security.web.access.intercept.AuthorizationFilter@6a4f3df4]
+2026-04-16 23:30:09 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 5000 (http) with context path '/api'
+2026-04-16 23:30:09 [main] INFO  c.j.JayshreeAquaApplication - Started JayshreeAquaApplication in 5.382 seconds (process running for 5.88)
+2026-04-16 23:30:09 [main] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.user_id 
+    from
+        ja_users u1_0 
+    where
+        u1_0.email=? 
+    limit
+        ?
+2026-04-16 23:30:09 [main] DEBUG org.hibernate.SQL - 
+    /* select
+        count(*) 
+    from
+        Product x */ select
+            count(*) 
+        from
+            ja_products p1_0
+2026-04-16 23:30:36 [http-nio-5000-exec-1] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-16 23:30:36 [http-nio-5000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-16 23:30:36 [http-nio-5000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-04-16 23:30:37 [http-nio-5000-exec-2] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.address_line1,
+        u1_0.address_line2,
+        u1_0.city,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.email_verified,
+        u1_0.full_name,
+        u1_0.is_active,
+        u1_0.password_hash,
+        u1_0.phone,
+        u1_0.pincode,
+        u1_0.role,
+        u1_0.updated_at 
+    from
+        ja_users u1_0 
+    where
+        u1_0.email=?
+2026-04-16 23:30:37 [http-nio-5000-exec-2] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.address_line1,
+        u1_0.address_line2,
+        u1_0.city,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.email_verified,
+        u1_0.full_name,
+        u1_0.is_active,
+        u1_0.password_hash,
+        u1_0.phone,
+        u1_0.pincode,
+        u1_0.role,
+        u1_0.updated_at 
+    from
+        ja_users u1_0 
+    where
+        u1_0.email=?
+2026-04-16 23:30:37 [http-nio-5000-exec-2] DEBUG org.hibernate.SQL - 
+    /* insert for
+        com.jayshreeaqua.model.RefreshToken */insert 
+    into
+        refresh_token (expiry_date, token, user_id) 
+    values
+        (?, ?, ?)
+2026-04-16 23:30:38 [http-nio-5000-exec-5] INFO  c.j.security.JwtAuthFilter - Authenticated user: adityapawar62002@gmail.com
+2026-04-16 23:30:38 [http-nio-5000-exec-5] INFO  c.j.security.JwtAuthFilter - Role: CUSTOMER
+2026-04-16 23:30:38 [http-nio-5000-exec-5] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        p1_0.product_id,
+        p1_0.bottle_size,
+        p1_0.created_at,
+        p1_0.description,
+        p1_0.image_url,
+        p1_0.is_available,
+        p1_0.name,
+        p1_0.price_per_unit,
+        p1_0.sku,
+        p1_0.stock_quantity,
+        p1_0.updated_at,
+        p1_0.water_type 
+    from
+        ja_products p1_0 
+    where
+        p1_0.is_available
+2026-04-16 23:30:38 [http-nio-5000-exec-7] INFO  c.j.security.JwtAuthFilter - Authenticated user: adityapawar62002@gmail.com
+2026-04-16 23:30:38 [http-nio-5000-exec-7] INFO  c.j.security.JwtAuthFilter - Role: CUSTOMER
+2026-04-16 23:30:38 [http-nio-5000-exec-7] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        p1_0.product_id,
+        p1_0.bottle_size,
+        p1_0.created_at,
+        p1_0.description,
+        p1_0.image_url,
+        p1_0.is_available,
+        p1_0.name,
+        p1_0.price_per_unit,
+        p1_0.sku,
+        p1_0.stock_quantity,
+        p1_0.updated_at,
+        p1_0.water_type 
+    from
+        ja_products p1_0 
+    where
+        p1_0.is_available
+2026-04-16 23:31:06 [http-nio-5000-exec-10] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.address_line1,
+        u1_0.address_line2,
+        u1_0.city,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.email_verified,
+        u1_0.full_name,
+        u1_0.is_active,
+        u1_0.password_hash,
+        u1_0.phone,
+        u1_0.pincode,
+        u1_0.role,
+        u1_0.updated_at 
+    from
+        ja_users u1_0 
+    where
+        u1_0.email=?
+2026-04-16 23:31:06 [http-nio-5000-exec-10] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.address_line1,
+        u1_0.address_line2,
+        u1_0.city,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.email_verified,
+        u1_0.full_name,
+        u1_0.is_active,
+        u1_0.password_hash,
+        u1_0.phone,
+        u1_0.pincode,
+        u1_0.role,
+        u1_0.updated_at 
+    from
+        ja_users u1_0 
+    where
+        u1_0.email=?
+2026-04-16 23:31:06 [http-nio-5000-exec-10] DEBUG org.hibernate.SQL - 
+    /* insert for
+        com.jayshreeaqua.model.RefreshToken */insert 
+    into
+        refresh_token (expiry_date, token, user_id) 
+    values
+        (?, ?, ?)
+2026-04-16 23:31:06 [http-nio-5000-exec-4] INFO  c.j.security.JwtAuthFilter - Authenticated user: adityapawar62002@gmail.com
+2026-04-16 23:31:06 [http-nio-5000-exec-4] INFO  c.j.security.JwtAuthFilter - Role: CUSTOMER
+2026-04-16 23:31:06 [http-nio-5000-exec-4] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        p1_0.product_id,
+        p1_0.bottle_size,
+        p1_0.created_at,
+        p1_0.description,
+        p1_0.image_url,
+        p1_0.is_available,
+        p1_0.name,
+        p1_0.price_per_unit,
+        p1_0.sku,
+        p1_0.stock_quantity,
+        p1_0.updated_at,
+        p1_0.water_type 
+    from
+        ja_products p1_0 
+    where
+        p1_0.is_available
+2026-04-16 23:31:06 [http-nio-5000-exec-3] INFO  c.j.security.JwtAuthFilter - Authenticated user: adityapawar62002@gmail.com
+2026-04-16 23:31:06 [http-nio-5000-exec-3] INFO  c.j.security.JwtAuthFilter - Role: CUSTOMER
+2026-04-16 23:31:06 [http-nio-5000-exec-3] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        p1_0.product_id,
+        p1_0.bottle_size,
+        p1_0.created_at,
+        p1_0.description,
+        p1_0.image_url,
+        p1_0.is_available,
+        p1_0.name,
+        p1_0.price_per_unit,
+        p1_0.sku,
+        p1_0.stock_quantity,
+        p1_0.updated_at,
+        p1_0.water_type 
+    from
+        ja_products p1_0 
+    where
+        p1_0.is_available
+2026-04-16 23:33:06 [http-nio-5000-exec-10] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.address_line1,
+        u1_0.address_line2,
+        u1_0.city,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.email_verified,
+        u1_0.full_name,
+        u1_0.is_active,
+        u1_0.password_hash,
+        u1_0.phone,
+        u1_0.pincode,
+        u1_0.role,
+        u1_0.updated_at 
+    from
+        ja_users u1_0 
+    where
+        u1_0.email=?
+2026-04-16 23:33:06 [http-nio-5000-exec-10] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.address_line1,
+        u1_0.address_line2,
+        u1_0.city,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.email_verified,
+        u1_0.full_name,
+        u1_0.is_active,
+        u1_0.password_hash,
+        u1_0.phone,
+        u1_0.pincode,
+        u1_0.role,
+        u1_0.updated_at 
+    from
+        ja_users u1_0 
+    where
+        u1_0.email=?
+2026-04-16 23:33:06 [http-nio-5000-exec-10] DEBUG org.hibernate.SQL - 
+    /* insert for
+        com.jayshreeaqua.model.RefreshToken */insert 
+    into
+        refresh_token (expiry_date, token, user_id) 
+    values
+        (?, ?, ?)
+2026-04-16 23:33:06 [http-nio-5000-exec-4] INFO  c.j.security.JwtAuthFilter - Authenticated user: adityapawar62002@gmail.com
+2026-04-16 23:33:06 [http-nio-5000-exec-4] INFO  c.j.security.JwtAuthFilter - Role: CUSTOMER
+2026-04-16 23:33:06 [http-nio-5000-exec-4] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        p1_0.product_id,
+        p1_0.bottle_size,
+        p1_0.created_at,
+        p1_0.description,
+        p1_0.image_url,
+        p1_0.is_available,
+        p1_0.name,
+        p1_0.price_per_unit,
+        p1_0.sku,
+        p1_0.stock_quantity,
+        p1_0.updated_at,
+        p1_0.water_type 
+    from
+        ja_products p1_0 
+    where
+        p1_0.is_available
+2026-04-16 23:33:06 [http-nio-5000-exec-3] INFO  c.j.security.JwtAuthFilter - Authenticated user: adityapawar62002@gmail.com
+2026-04-16 23:33:06 [http-nio-5000-exec-3] INFO  c.j.security.JwtAuthFilter - Role: CUSTOMER
+2026-04-16 23:33:06 [http-nio-5000-exec-3] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        p1_0.product_id,
+        p1_0.bottle_size,
+        p1_0.created_at,
+        p1_0.description,
+        p1_0.image_url,
+        p1_0.is_available,
+        p1_0.name,
+        p1_0.price_per_unit,
+        p1_0.sku,
+        p1_0.stock_quantity,
+        p1_0.updated_at,
+        p1_0.water_type 
+    from
+        ja_products p1_0 
+    where
+        p1_0.is_available
