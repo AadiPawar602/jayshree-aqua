@@ -1,0 +1,107 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: jayshree-aqua-backend
+
+  # ============================================================
+  # ORACLE DATABASE CONFIGURATION
+  # ============================================================
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:ORCL
+    # For Oracle 19c+/Pluggable DB use:
+    # url: jdbc:oracle:thin:@//localhost:1521/XEPDB1
+    username: ${DB_USERNAME:jayshree_aqua}
+    password: ${DB_PASSWORD:aqua@123}
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      connection-pool-name: JayshreeAquaPool
+      maximum-pool-size: 10
+      minimum-idle: 3
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  # ============================================================
+  # JPA / HIBERNATE
+  # ============================================================
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    hibernate:
+      ddl-auto: update # use 'create' on first run, then 'update'
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+    open-in-view: false
+
+  # ============================================================
+  # MAIL CONFIGURATION (for order confirmation emails)
+  # ============================================================
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:your-email@gmail.com}
+    password: ${MAIL_PASSWORD:your-app-password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# ============================================================
+# JWT CONFIGURATION
+# ============================================================
+app:
+  jwt:
+    secret: ${JWT_SECRET:JayshreeAquaSecretKey2024VeryLongSecretKeyForHMAC512Algorithm}
+    expiration-ms: 86400000 # 24 hours
+    refresh-expiration-ms: 604800000 # 7 days
+
+  # ============================================================
+  # CORS CONFIGURATION
+  # ============================================================
+  cors:
+    allowed-origins: "http://localhost:3000,http://localhost:5173,http://localhost:5174,https://jayshreeaqua.com"
+
+  # ============================================================
+  # PAGINATION DEFAULTS
+  # ============================================================
+  pagination:
+    default-page-size: 10
+    max-page-size: 100
+
+# ============================================================
+# LOGGING
+# ============================================================
+logging:
+  level:
+    com.jayshreeaqua: DEBUG
+    org.springframework.security: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/jayshree-aqua.log
+
+# ============================================================
+# SWAGGER / OPENAPI
+# ============================================================
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
