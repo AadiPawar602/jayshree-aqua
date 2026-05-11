@@ -1,14 +1,16 @@
 package com.jayshreeaqua.service;
 
+import java.util.List;
+
+import com.jayshreeaqua.dto.request.ProductRequest;
 import com.jayshreeaqua.dto.response.ProductResponse;
 import com.jayshreeaqua.model.Product;
-import java.util.List;
 
 public interface ProductService {
     List<ProductResponse> getAllAvailable();
     List<ProductResponse> getByWaterType(Product.WaterType type);
     ProductResponse getById(Long id);
-    ProductResponse create(Product product);
-    ProductResponse update(Long id, Product product);
+    ProductResponse create(ProductRequest request);
+    ProductResponse update(Long id, ProductRequest request);
     void delete(Long id);
 }

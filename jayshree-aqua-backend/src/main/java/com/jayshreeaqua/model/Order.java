@@ -7,12 +7,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-/**
- * Order Entity — single purchase or event bulk order.
- * Oracle table: JA_ORDERS
- */
 @Entity
 @Table(name = "JA_ORDERS")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
@@ -25,75 +22,83 @@ public class Order extends BaseEntity {
     private Long orderId;
 
     @Column(name = "ORDER_NUMBER", unique = true, nullable = false, length = 20)
-    private String orderNumber;     // e.g. JA-2024-000123
+    private String orderNumber;
 
-    // ── Relations ─────────────────────────────────────────────
+    // ── RELATION ──────────────────────────────────────────────
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID", nullable = false)
     private User user;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default
-    private List<OrderItem> orderItems = new ArrayList<>();
-
-    // ── Order Type ────────────────────────────────────────────
+    // ── ORDER TYPE ────────────────────────────────────────────
     @Enumerated(EnumType.STRING)
-    @Column(name = "ORDER_TYPE", nullable = false, length = 20)
+    @Column(name = "ORDER_TYPE", nullable = false)
     @Builder.Default
     private OrderType orderType = OrderType.ONE_TIME;
 
-    // ── Status ────────────────────────────────────────────────
+    // ── STATUS ────────────────────────────────────────────────
     @Enumerated(EnumType.STRING)
-    @Column(name = "STATUS", nullable = false, length = 20)
+    @Column(name = "STATUS", nullable = false)
     @Builder.Default
     private OrderStatus status = OrderStatus.PENDING;
 
-    // ── Financials ────────────────────────────────────────────
-    @Column(name = "SUBTOTAL", nullable = false, precision = 10, scale = 2)
+    // ── FINANCIALS ────────────────────────────────────────────
+    @Column(name = "SUBTOTAL", nullable = false)
     private BigDecimal subtotal;
 
-    @Column(name = "DELIVERY_CHARGE", precision = 10, scale = 2)
     @Builder.Default
+    @Column(name = "DELIVERY_CHARGE")
     private BigDecimal deliveryCharge = BigDecimal.ZERO;
 
-    @Column(name = "DISCOUNT", precision = 10, scale = 2)
     @Builder.Default
+    @Column(name = "DISCOUNT")
     private BigDecimal discount = BigDecimal.ZERO;
 
-    @Column(name = "TOTAL_AMOUNT", nullable = false, precision = 10, scale = 2)
+    @Column(name = "TOTAL_AMOUNT", nullable = false)
     private BigDecimal totalAmount;
 
-    // ── Delivery ──────────────────────────────────────────────
-    @Column(name = "DELIVERY_ADDRESS", length = 400)
+    // ── DELIVERY ──────────────────────────────────────────────
+    @Column(name = "DELIVERY_ADDRESS")
     private String deliveryAddress;
 
     @Column(name = "DELIVERY_DATE")
     private LocalDate deliveryDate;
 
-    @Column(name = "DELIVERY_NOTES", length = 300)
+    @Column(name = "DELIVERY_NOTES")
     private String deliveryNotes;
 
-    // ── Payment ───────────────────────────────────────────────
+    // ── PAYMENT (🔥 UPDATED) ─────────────────────────────────
+    
     @Enumerated(EnumType.STRING)
-    @Column(name = "PAYMENT_STATUS", length = 20)
+    @Column(name = "PAYMENT_STATUS")
     @Builder.Default
     private PaymentStatus paymentStatus = PaymentStatus.PENDING;
 
-    @Column(name = "PAYMENT_METHOD", length = 30)
-    private String paymentMethod;   // UPI, CASH, CARD, NETBANKING
+    @Column(name = "PAYMENT_METHOD")
+    private String paymentMethod; // UPI, CARD, CASH
 
-    @Column(name = "PAYMENT_REF", length = 100)
-    private String paymentRef;
+    // 🔥 Razorpay fields (IMPORTANT)
+    @Column(name = "RAZORPAY_ORDER_ID")
+    private String razorpayOrderId;
 
-    // ── Event-specific ────────────────────────────────────────
-    @Column(name = "EVENT_NAME", length = 100)
-    private String eventName;       // Populated for EVENT orders
+    @Column(name = "RAZORPAY_PAYMENT_ID")
+    private String razorpayPaymentId;
+
+    @Column(name = "RAZORPAY_SIGNATURE")
+    private String razorpaySignature;
+
+    // ── EVENT ────────────────────────────────────────────────
+    @Column(name = "EVENT_NAME")
+    private String eventName;
 
     @Column(name = "EVENT_DATE")
     private LocalDate eventDate;
 
-    // ── Enums ─────────────────────────────────────────────────
+    // ── ITEMS ────────────────────────────────────────────────
+    @JsonManagedReference
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> items = new ArrayList<>();
+
+    // ── ENUMS ────────────────────────────────────────────────
     public enum OrderType {
         ONE_TIME, EVENT
     }
@@ -105,21 +110,21 @@ public class Order extends BaseEntity {
     public enum PaymentStatus {
         PENDING, PAID, FAILED, REFUNDED
     }
-    
+
+    // ── BUSINESS LOGIC ───────────────────────────────────────
     public void calculateTotals() {
-        this.subtotal = orderItems.stream()
-            .map(item -> item.getUnitPrice()
-                .multiply(BigDecimal.valueOf(item.getQuantity())))
-            .reduce(BigDecimal.ZERO, BigDecimal::add);
+        this.subtotal = items.stream()
+                .map(item -> item.getPrice()
+                        .multiply(BigDecimal.valueOf(item.getQuantity())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         this.totalAmount = subtotal
-            .add(deliveryCharge)
-            .subtract(discount);
+                .add(deliveryCharge)
+                .subtract(discount);
     }
 
-    // ── Helper ────────────────────────────────────────────────
     public void addItem(OrderItem item) {
-        orderItems.add(item);
+        items.add(item);
         item.setOrder(this);
     }
 }

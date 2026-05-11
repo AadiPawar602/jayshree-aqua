@@ -27,11 +27,11 @@ public class Product extends BaseEntity {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "WATER_TYPE", nullable = false, length = 30)
+    @Column(name = "WATER_TYPE", nullable = true, length = 30)
     private WaterType waterType;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "BOTTLE_SIZE", nullable = false, length = 10)
+    @Column(name = "BOTTLE_SIZE", length = 10)
     private BottleSize bottleSize;
 
     @Column(name = "PRICE_PER_UNIT", nullable = false, precision = 10, scale = 2)
@@ -50,8 +50,20 @@ public class Product extends BaseEntity {
 
     @Column(name = "SKU", unique = true, length = 30)
     private String sku;       // e.g. "RO-500ML-001"
+    
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "CATEGORY", nullable = false)
+    private ProductCategory category;
 
     // ── Enums ─────────────────────────────────────────────────
+    
+    public enum ProductCategory {
+        WATER,
+        JAR,
+        ACCESSORY
+    }
+    
     public enum WaterType {
         FILTERED,           // Regular RO purified
         COLD_FILTERED       // Chilled RO purified
@@ -62,7 +74,8 @@ public class Product extends BaseEntity {
         L_1("1L", 1.0),
         L_2("2L", 2.0),
         L_5("5L", 5.0),
-        L_10("10L", 10.0);
+        L_10("10L", 10.0),
+    	L_30("30L", 30.0);
 
         private final String label;
         private final double litres;

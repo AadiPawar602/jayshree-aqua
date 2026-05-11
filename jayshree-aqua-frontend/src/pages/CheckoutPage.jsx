@@ -1,36 +1,110 @@
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import { orderAPI } from "../services/api";
 import api from "../services/api";
+import { useAuth } from "../context/AuthContext";
+import { useState } from "react";
 
 export default function CheckoutPage() {
+
   const { cart, clearCart } = useCart();
   const navigate = useNavigate();
+  const { token, loading } = useAuth();
 
-  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-  console.log("CART DATA:", cart); 
+  const [paying, setPaying] = useState(false);
 
-    const handlePlaceOrder = async () => {
+  const total = cart.reduce(
+    (sum, item) => sum + Number(item.pricePerUnit || 0) * item.qty,
+    0
+  );
+
+  const getFutureDate = () => {
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    return d.toISOString().split("T")[0];
+  };
+
+  const handlePayment = async () => {
+
+    if (paying) return;
+    if (cart.length === 0) return alert("Cart is empty");
+
+    setPaying(true);
+
     try {
-            const orderData = {
-            items: cart.map(item => ({
-                productId: item.productId || item.id,
-                quantity: item.quantity || item.qty
-            })),
-            deliveryAddress: "Pune",
-            deliveryDate: "2026-04-20",
-            orderType: "ONE_TIME"
-        };
+      const orderRes = await orderAPI.placeOrder({
+        items: cart.map(item => ({
+          productId: item.productId,
+          quantity: item.qty
+        })),
+        deliveryAddress: "Pimpri-Chinchwad, Pune",
+        deliveryDate: getFutureDate(),
+        orderType: "ONE_TIME",
+        paymentMethod: "ONLINE"
+      });
 
-        await api.post("/orders", orderData);
+      const order = orderRes.data.data;
 
-        clearCart();
-        navigate("/success");
+      if (!order?.razorpayOrderId) {
+        alert("Payment init failed");
+        return;
+      }
+
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY,
+        amount: Math.round(order.totalAmount * 100),
+        currency: "INR",
+        name: "Jayshree Aqua",
+        description: "Order Payment",
+        order_id: order.razorpayOrderId,
+
+        prefill: {
+          name: "Aditya Pawar",
+          email: "test@razorpay.com",
+          contact: "9999999999"
+        },
+
+        handler: async function (response) {
+          try {
+            await api.post("/payments/verify", response);
+
+            alert("Payment successful ✅");
+            clearCart();
+            navigate("/success");
+
+          } catch (err) {
+            alert("Verification failed ❌");
+          }
+        },
+
+        modal: {
+          ondismiss: function () {
+            alert("Payment cancelled ❌");
+          }
+        },
+
+        theme: {
+          color: "#0284c7"
+        }
+      };
+
+      const rzp = new window.Razorpay(options);
+
+      // 🔥 HANDLE FAILURE
+      rzp.on("payment.failed", function () {
+        alert("Payment failed ❌");
+      });
+
+      rzp.open();
 
     } catch (err) {
-        console.error("FULL ERROR:", err.response?.data || err);
-        alert("Order failed ❌");
+      console.error(err);
+      alert("Payment failed ❌");
+
+    } finally {
+      setPaying(false);
     }
-    };
+  };
 
   return (
     <div style={{ padding: 40 }}>
@@ -41,16 +115,16 @@ export default function CheckoutPage() {
       ) : (
         <>
           {cart.map(item => (
-            <div key={item.id || item.productId }>
-              <p>{item.name} × {item.qty || item.quantity }</p>
+            <div key={item.productId}>
+              <p>{item.name} × {item.qty}</p>
             </div>
           ))}
 
           <h2>Total: ₹{total}</h2>
 
-            <button onClick={handlePlaceOrder}>
-                Place Order
-            </button>
+          <button onClick={handlePayment} disabled={loading || !token || paying}>
+            {paying ? "Processing..." : "Pay Now"}
+          </button>
         </>
       )}
     </div>

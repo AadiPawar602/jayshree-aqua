@@ -34,7 +34,7 @@ public class OrderItem extends BaseEntity {
     private Integer quantity;
 
     @Column(name = "UNIT_PRICE", nullable = false, precision = 10, scale = 2)
-    private BigDecimal unitPrice;       // price at time of order (snapshot)
+    private BigDecimal price;       // price at time of order (snapshot)
 
     @Column(name = "LINE_TOTAL", nullable = false, precision = 10, scale = 2)
     private BigDecimal lineTotal;       // quantity × unitPrice

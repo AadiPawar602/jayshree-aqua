@@ -46,9 +46,8 @@ export default function Navbar() {
   // 🔥 ADMIN ONLY
   ...(user?.role === "ADMIN"
     ? [
-        { k: "admin", l: "Admin Panel" },
-        { k: "manage-products", l: "Products" },
-        { k: "all-orders", l: "All Orders" },
+        { k: "admin", l: "Admin Orders" },
+        { k: "admin/products", l: "Manage Products" },
       ]
     : []),
 ];

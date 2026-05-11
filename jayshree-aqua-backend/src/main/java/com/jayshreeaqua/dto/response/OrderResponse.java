@@ -17,6 +17,7 @@ public class OrderResponse {
     private BigDecimal deliveryCharge;
     private BigDecimal discount;
     private BigDecimal totalAmount;
+    private String razorpayOrderId;
     private String deliveryAddress;
     private LocalDate deliveryDate;
     private Order.PaymentStatus paymentStatus;
@@ -33,7 +34,7 @@ public class OrderResponse {
         private String productName;
         private String bottleSize;
         private Integer quantity;
-        private BigDecimal unitPrice;
+        private BigDecimal price;
         private BigDecimal lineTotal;
     }
 }

@@ -16,49 +16,82 @@ export function CartProvider({ children }) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  // 🔹 Add to cart
+  // 🔹 Add to cart (CONSISTENT STRUCTURE)
   const addToCart = (product) => {
     setCart((prev) => {
-      const existing = prev.find(p => p.id === product.id);
+      const existing = prev.find(p => p.productId === product.productId);
+
       if (existing) {
         return prev.map(p =>
-          p.id === product.id
+          p.productId === product.productId
             ? { ...p, qty: p.qty + 1 }
             : p
         );
       }
-      return [...prev, { ...product, qty: 1 }];
+
+      return [
+        ...prev,
+        {
+          productId: product.productId,
+          name: product.name,
+          pricePerUnit: product.pricePerUnit, // ✅ FIXED (IMPORTANT)
+          qty: 1
+        }
+      ];
     });
   };
 
   // 🔹 Remove
-  const removeFromCart = (id) => {
-    setCart(prev => prev.filter(p => p.id !== id));
+  const removeFromCart = (productId) => {
+    setCart(prev => prev.filter(p => p.productId !== productId));
   };
 
   // 🔹 Clear
   const clearCart = () => setCart([]);
 
-  const increaseQty = (id) => {
-  setCart(prev =>
-    prev.map(item =>
-      item.id === id ? { ...item, qty: item.qty + 1 } : item
-    )
-  );
-};
+  // 🔹 Increase
+  const increaseQty = (productId) => {
+    setCart(prev =>
+      prev.map(item =>
+        item.productId === productId
+          ? { ...item, qty: item.qty + 1 }
+          : item
+      )
+    );
+  };
 
-const decreaseQty = (id) => {
-  setCart(prev =>
-    prev.map(item =>
-      item.id === id
-        ? { ...item, qty: item.qty > 1 ? item.qty - 1 : 1 }
-        : item
-    )
+  // 🔹 Decrease
+  const decreaseQty = (productId) => {
+    setCart(prev =>
+      prev.map(item =>
+        item.productId === productId
+          ? { ...item, qty: item.qty > 1 ? item.qty - 1 : 1 }
+          : item
+      )
+    );
+  };
+
+  // 🔥 TOTAL CALCULATION (NEW - IMPORTANT)
+  const cartTotal = cart.reduce(
+    (sum, item) => sum + item.pricePerUnit * item.qty,
+    0
   );
-};
+
+  const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, increaseQty, decreaseQty }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        increaseQty,
+        decreaseQty,
+        cartTotal,   // ✅ NEW
+        cartCount    // ✅ NEW
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

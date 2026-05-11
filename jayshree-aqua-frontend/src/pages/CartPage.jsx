@@ -14,7 +14,7 @@ export default function CartPage() {
 
   // 💰 Total
   const total = cart.reduce((sum, item) => {
-    return sum + item.price * item.qty;
+    return sum + item.pricePerUnit * item.qty;
   }, 0);
 
   return (
@@ -27,7 +27,7 @@ export default function CartPage() {
         <>
           {cart.map(item => (
             <div
-              key={item.id}
+              key={item.productId}
               style={{
                 border: "1px solid #ddd",
                 padding: 15,
@@ -37,18 +37,18 @@ export default function CartPage() {
             >
               <h3>{item.name}</h3>
 
-              <p>Price: ₹{item.price}</p>
+              <p>Price: ₹{item.pricePerUnit}</p>
 
               {/* 🔥 Quantity Controls */}
               <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                <button onClick={() => decreaseQty(item.id)}>➖</button>
+                <button onClick={() => decreaseQty(item.productId)}>➖</button>
                 <span>{item.qty}</span>
-                <button onClick={() => increaseQty(item.id)}>➕</button>
+                <button onClick={() => increaseQty(item.productId)}>➕</button>
               </div>
 
-              <p>Subtotal: ₹{item.price * item.qty}</p>
+              <p>Subtotal: ₹{item.pricePerUnit * item.qty}</p>
 
-              <button onClick={() => removeFromCart(item.id)}>
+              <button onClick={() => removeFromCart(item.productId)}>
                 ❌ Remove
               </button>
             </div>

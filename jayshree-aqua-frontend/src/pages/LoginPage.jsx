@@ -14,28 +14,28 @@ export default function LoginPage() {
 
   const handle = (e) => setForm({...form,[e.target.name]:e.target.value});
 
-  useEffect(() => {
-  if (isAuthenticated) {
-    navigate("/dashboard");
-  }
-}, [isAuthenticated, navigate]);
+  
 
   const submit = async (e) => {
-    e.preventDefault();
-    setError(""); 
-    setLoading(true);
-    try {
-      await login(form);
+  e.preventDefault();
+  setError("");
+  setLoading(true);
 
+  try {
+    await login(form);
+    setTimeout(() => {
+      navigate("/dashboard");
+    }, 50);
 
-    } catch (err) {
-      setError(
-        err.response?.data?.message ||
-        "Invalid email or password."
-      );
-    }
-    finally{ setLoading(false); }
-  };
+  } catch (err) {
+    setError(
+      err.response?.data?.message ||
+      "Invalid email or password."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
 
   return (
