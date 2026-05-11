@@ -1,7 +1,22 @@
-**/target/
-*.jar
+# Maven
+target/
+
+# Logs
 *.log
-node_modules/
-.env
+
+# IDE
 .idea/
 .vscode/
+
+# OS
+.DS_Store
+
+# Java
+*.class
+*.jar
+
+# Node
+node_modules/
+
+# Env
+.env
